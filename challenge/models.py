@@ -26,17 +26,21 @@ class FormattedUser(BaseModel):
 
     @staticmethod
     def obfuscate_email(email: EmailStr) -> EmailStr:
-        min_alias_length: int = 4
-        [alias, domain] = email.split("@")
-        if (domain == 'niuco.com.br'): return email
-        if (len(alias) <= min_alias_length): return email
-        maskedAlias = f"{email[0:2]}{"*" * (len(alias) - 4)}{email[-2:]}"
-        return f"{maskedAlias}@{domain}"
+        min_alias_length = 4
+        alias, domain = email.split('@')
+        if domain == 'niuco.com.br':
+            return email
+        if len(alias) <= min_alias_length:
+            return email
+        masked_alias = f"{alias[0:2]}{'*' * (len(alias) - 4)}{alias[-2:]}"
+        return f'{masked_alias}@{domain}'
 
     @classmethod
     def from_user(cls, user: User) -> Self:
         email = cls.obfuscate_email(user.email)
-        lastActivity = datetime.fromtimestamp(user.last_activity, pytz.utc).isoformat()
+        lastActivity = datetime.fromtimestamp(
+            user.last_activity, pytz.utc
+        ).isoformat()
         return cls(id=user.id, email=email, lastActivity=lastActivity)
 
 

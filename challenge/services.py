@@ -9,18 +9,18 @@ from challenge.models import FormattedUser, User
 
 async def get_users():
     async with httpx.AsyncClient() as client:
-        response = await client.get(f"{settings.api_url}/users")
+        response = await client.get(f'{settings.api_url}/users')
         response.raise_for_status()
         return [User(**user_data) for user_data in response.json()]
 
 
 async def get_user(id: UUID) -> User:
     async with httpx.AsyncClient() as client:
-        response = await client.get(f"{settings.api_url}/users/{id}")
+        response = await client.get(f'{settings.api_url}/users/{id}')
         response.raise_for_status()
         user_data = response.json()
         if user_data is None:
-            raise HTTPException(status_code=404, detail="User not found")
+            raise HTTPException(status_code=404, detail='User not found')
         return User(**user_data)
 
 
