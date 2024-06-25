@@ -12,7 +12,6 @@ from challenge.services import (
 )
 
 
-@pytest.mark.asyncio()
 async def test_get_users(mocker):
     mocker.patch(
         'challenge.services.get_users',
@@ -33,7 +32,6 @@ async def test_get_users(mocker):
     assert all(isinstance(user, User) for user in users)
 
 
-@pytest.mark.asyncio()
 async def test_get_user(mocker):
     user_id = UUID('some-valid-uuid')
     mocker.patch(
@@ -52,7 +50,6 @@ async def test_get_user(mocker):
     assert isinstance(user, User)
 
 
-@pytest.mark.asyncio()
 async def test_get_user_not_found(mocker):
     notFound: int = 404
     user_id = UUID('non-existent-uuid')
@@ -68,7 +65,6 @@ async def test_get_user_not_found(mocker):
     assert exc_info.value.status_code == notFound
 
 
-@pytest.mark.asyncio()
 async def test_get_formatted_users(mocker):
     mocker.patch(
         'challenge.services.get_formatted_users',
@@ -86,7 +82,6 @@ async def test_get_formatted_users(mocker):
     assert all(isinstance(user, FormattedUser) for user in formatted_users)
 
 
-@pytest.mark.asyncio()
 async def test_get_formatted_user(mocker):
     user_id = UUID('0373e634-2d03-457e-a24d-2b0c8c3b7c37')
     mocker.patch(
