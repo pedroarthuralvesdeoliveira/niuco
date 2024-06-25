@@ -14,7 +14,7 @@ async def get_users():
         return [User(**user_data) for user_data in response.json()]
 
 
-async def get_user(id: UUID):
+async def get_user(id: UUID) -> User:
     async with httpx.AsyncClient() as client:
         response = await client.get(f"{settings.api_url}/users/{id}")
         response.raise_for_status()

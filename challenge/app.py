@@ -15,14 +15,14 @@ app = FastAPI()
 
 @app.get('/users/', response_model=UserList)
 async def users():
-  users = await get_users() 
+  users = await get_users()
   return {"users": users}
 
 
 @app.get('/users/{user_id}', response_model=User)
 async def user(user_id: UUID):
-  user = await get_user(user_id)
-  return {"formattedUser": user}
+  user: User = await get_user(user_id)
+  return user
 
 
 @app.get('/formattedUsers/', response_model=FormattedUserList)
@@ -33,4 +33,5 @@ async def formattedUsers():
 
 @app.get('/formattedUsers/{user_id}', response_model=FormattedUser)
 async def formattedUser(user_id: UUID):
-  return await get_formatted_user(user_id)
+  user = await get_formatted_user(user_id)
+  return user
