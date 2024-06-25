@@ -1,3 +1,4 @@
+import pytest
 from fastapi.testclient import TestClient
 
 from challenge.app import app
@@ -5,6 +6,7 @@ from challenge.app import app
 client = TestClient(app)
 
 
+@pytest.mark.asyncio()
 async def test_get_users(mocker):
     mocker.patch(
         'challenge.services.get_users',
@@ -29,6 +31,7 @@ async def test_get_users(mocker):
     assert len(data['users']) > 0
 
 
+@pytest.mark.asyncio()
 async def test_get_user(mocker):
     user_id = 'some-valid-uuid'
     mocker.patch(
@@ -50,6 +53,7 @@ async def test_get_user(mocker):
     assert data['id'] == user_id
 
 
+@pytest.mark.asyncio()
 async def test_get_formatted_users(mocker):
     mocker.patch(
         'challenge.services.get_formatted_users',
@@ -71,6 +75,7 @@ async def test_get_formatted_users(mocker):
     assert len(data['formattedUsers']) > 0
 
 
+@pytest.mark.asyncio()
 async def test_get_formatted_user(mocker):
     user_id = 'some-valid-uuid'
     mocker.patch(
