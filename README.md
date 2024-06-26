@@ -4,7 +4,25 @@ Este projeto tem como objetivo integrar-se com a API de um SaaS utilizado por cl
 ## Descrição
 A aplicação se conecta à API mock do SaaS, coleta dados dos usuários, converte-os conforme as regras especificadas e os exibe. 
 
+## Estrutura de pastas 
 
+challenge
+  - Código-fonte principal da aplicação
+
+tests
+  - Testes automatizados garantindo a qualidade
+
+.github
+  - Pipeline de CI|CD
+
+### Tecnologias utilizadas
+- **Docker**: para desacoplamento de infraestrutura com uso de virtualização
+- **Docker-compose**: Para orquestração da aplicação multi-container 
+- **FastAPI**: framework web para a construção de APIs com Python
+- **Pydantic**: Biblioteca de validação de código
+- **Pytest**: para os testes unitários
+- **Python**: utilizando o paradigma orientado a objetos
+----------------------------------
 ### Instalação e Execução
 Fiz utilizando WSL2 Ubuntu. 
 
